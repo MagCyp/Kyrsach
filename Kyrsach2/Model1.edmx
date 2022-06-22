@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище FirstModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_TransactionIndex_3d532083-f1ab-4ad0-bad5-d6d98094990d">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeTracking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTimeTracking" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrackingName" Type="nvarchar" MaxLength="50" />
+          <Property Name="XMLTracking" Type="xml" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_ID" />
+          </Key>
+          <Property Name="book_ID" Type="int" Nullable="false" />
+          <Property Name="title" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="author" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="genre" Type="nchar" MaxLength="20" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="book_count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="discipline_ID" />
+          </Key>
+          <Property Name="discipline_ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="group_ID" />
+          </Key>
+          <Property Name="group_ID" Type="int" Nullable="false" />
+          <Property Name="group_name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups_discipline">
+          <Key>
+            <PropertyRef Name="discipline_ID" />
+            <PropertyRef Name="group_ID" />
+          </Key>
+          <Property Name="discipline_ID" Type="int" Nullable="false" />
+          <Property Name="group_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Issues_of_books">
+          <Key>
+            <PropertyRef Name="issues_of_books_ID" />
+          </Key>
+          <Property Name="issues_of_books_ID" Type="int" Nullable="false" />
+          <Property Name="date_of_issues" Type="date" />
+          <Property Name="date_of_comeback" Type="date" />
+          <Property Name="book_ID" Type="int" Nullable="false" />
+          <Property Name="student_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="passport_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="int" Nullable="false" />
+          <Property Name="identification_code" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="surname" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Year_of_birth" Type="date" Nullable="false" />
+          <Property Name="Place_of_birth" Type="nchar" MaxLength="20" />
+          <Property Name="adress" Type="nchar" MaxLength="50" />
+          <Property Name="sex" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="marital_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="student_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="int" Nullable="false" />
+          <Property Name="student_ID" Type="int" Nullable="false" />
+          <Property Name="group_ID" Type="int" Nullable="false" />
+          <Property Name="scholarship" Type="money" />
+          <Property Name="place_in_rating" Type="int" Nullable="false" />
+          <Property Name="dorm_room" Type="int" />
+          <Property Name="headmaster" Type="bit" />
+        </EntityType>
+        <EntityType Name="Student_grade">
+          <Key>
+            <PropertyRef Name="number" />
+          </Key>
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="dsscipline_ID" Type="int" />
+          <Property Name="student_ID" Type="int" Nullable="false" />
+          <Property Name="grade" Type="float" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="passport_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" />
+          <Property Name="surname" Type="nchar" MaxLength="15" />
+          <Property Name="scientist_degree" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teachers_disciplines">
+          <Key>
+            <PropertyRef Name="discipline_ID" />
+            <PropertyRef Name="teacher_ID" />
+          </Key>
+          <Property Name="discipline_ID" Type="int" Nullable="false" />
+          <Property Name="teacher_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Groups_discipline_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Groups_discipline" Type="Self.Groups_discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="discipline_ID" />
+            </Principal>
+            <Dependent Role="Groups_discipline">
+              <PropertyRef Name="discipline_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_discipline_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups_discipline" Type="Self.Groups_discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="group_ID" />
+            </Principal>
+            <Dependent Role="Groups_discipline">
+              <PropertyRef Name="group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups1" Type="Self.Groups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="group_ID" />
+            </Principal>
+            <Dependent Role="Groups1">
+              <PropertyRef Name="group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Issues_of_books_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Issues_of_books" Type="Self.Issues_of_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_ID" />
+            </Principal>
+            <Dependent Role="Issues_of_books">
+              <PropertyRef Name="book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Issues_of_books_Student1">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Issues_of_books" Type="Self.Issues_of_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_ID" />
+            </Principal>
+            <Dependent Role="Issues_of_books">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="passport_ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="passport_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_rating_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="0..1" />
+          <End Role="Student_grade" Type="Self.Student_grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="discipline_ID" />
+            </Principal>
+            <Dependent Role="Student_grade">
+              <PropertyRef Name="dsscipline_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_rating_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student_grade" Type="Self.Student_grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_ID" />
+            </Principal>
+            <Dependent Role="Student_grade">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_disciplines_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Teachers_disciplines" Type="Self.Teachers_disciplines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="discipline_ID" />
+            </Principal>
+            <Dependent Role="Teachers_disciplines">
+              <PropertyRef Name="discipline_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_disciplines_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teachers_disciplines" Type="Self.Teachers_disciplines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="passport_ID" />
+            </Principal>
+            <Dependent Role="Teachers_disciplines">
+              <PropertyRef Name="teacher_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="C_scholarship_places" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="University" ReturnType="int" />
+        <Function Name="Count_scholarship_places" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="University" ReturnType="int" />
+        <Function Name="Get_scholarship" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="University" />
+        <Function Name="Scholarship" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="University" ReturnType="money">
+          <Parameter Name="student_ID" Type="nchar" Mode="In" />
+          <Parameter Name="places" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище FirstModelContainer">
+          <EntitySet Name="_TransactionIndex_3d532083-f1ab-4ad0-bad5-d6d98094990d" EntityType="Self._TransactionIndex_3d532083-f1ab-4ad0-bad5-d6d98094990d" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangeTracking" EntityType="Self.ChangeTracking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Groups_discipline" EntityType="Self.Groups_discipline" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Issues_of_books" EntityType="Self.Issues_of_books" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Student_grade" EntityType="Self.Student_grade" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="University" store:Type="Tables" />
+          <EntitySet Name="Teachers_disciplines" EntityType="Self.Teachers_disciplines" Schema="University" store:Type="Tables" />
+          <AssociationSet Name="FK_Groups_discipline_Discipline" Association="Self.FK_Groups_discipline_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Groups_discipline" EntitySet="Groups_discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_discipline_Groups" Association="Self.FK_Groups_discipline_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Groups_discipline" EntitySet="Groups_discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Groups" Association="Self.FK_Groups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Groups1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Issues_of_books_Book" Association="Self.FK_Issues_of_books_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Issues_of_books" EntitySet="Issues_of_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Issues_of_books_Student1" Association="Self.FK_Issues_of_books_Student1">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Issues_of_books" EntitySet="Issues_of_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_rating_Discipline" Association="Self.FK_Student_rating_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Student_grade" EntitySet="Student_grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_rating_Student" Association="Self.FK_Student_rating_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Student_grade" EntitySet="Student_grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_disciplines_Discipline" Association="Self.FK_Teachers_disciplines_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Teachers_disciplines" EntitySet="Teachers_disciplines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_disciplines_Teacher" Association="Self.FK_Teachers_disciplines_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teachers_disciplines" EntitySet="Teachers_disciplines" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FirstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeTracking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTimeTracking" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrackingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XMLTracking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_ID" />
+          </Key>
+          <Property Name="book_ID" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="book_count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Issues_of_books" Relationship="Self.FK_Issues_of_books_Book" FromRole="Book" ToRole="Issues_of_books" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="discipline_ID" />
+          </Key>
+          <Property Name="discipline_ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Student_grade" Relationship="Self.FK_Student_rating_Discipline" FromRole="Discipline" ToRole="Student_grade" />
+          <NavigationProperty Name="Groups" Relationship="Self.Groups_discipline" FromRole="Discipline" ToRole="Groups" />
+          <NavigationProperty Name="Teacher" Relationship="Self.Teachers_disciplines" FromRole="Discipline" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="group_ID" />
+          </Key>
+          <Property Name="group_ID" Type="Int32" Nullable="false" />
+          <Property Name="group_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groups1" Relationship="Self.FK_Groups_Groups" FromRole="Groups" ToRole="Groups1" />
+          <NavigationProperty Name="Groups2" Relationship="Self.FK_Groups_Groups" FromRole="Groups1" ToRole="Groups" />
+          <NavigationProperty Name="Discipline" Relationship="Self.Groups_discipline" FromRole="Groups" ToRole="Discipline" />
+        </EntityType>
+        <EntityType Name="Issues_of_books">
+          <Key>
+            <PropertyRef Name="issues_of_books_ID" />
+          </Key>
+          <Property Name="issues_of_books_ID" Type="Int32" Nullable="false" />
+          <Property Name="date_of_issues" Type="DateTime" Precision="0" />
+          <Property Name="date_of_comeback" Type="DateTime" Precision="0" />
+          <Property Name="book_ID" Type="Int32" Nullable="false" />
+          <Property Name="student_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_Issues_of_books_Book" FromRole="Issues_of_books" ToRole="Book" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Issues_of_books_Student1" FromRole="Issues_of_books" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="passport_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="Int32" Nullable="false" />
+          <Property Name="identification_code" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Year_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Place_of_birth" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="marital_status" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Person" FromRole="Person" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="student_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="Int32" Nullable="false" />
+          <Property Name="student_ID" Type="Int32" Nullable="false" />
+          <Property Name="group_ID" Type="Int32" Nullable="false" />
+          <Property Name="scholarship" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="place_in_rating" Type="Int32" Nullable="false" />
+          <Property Name="dorm_room" Type="Int32" />
+          <Property Name="headmaster" Type="Boolean" />
+          <NavigationProperty Name="Issues_of_books" Relationship="Self.FK_Issues_of_books_Student1" FromRole="Student" ToRole="Issues_of_books" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Student_Person" FromRole="Student" ToRole="Person" />
+          <NavigationProperty Name="Student_grade" Relationship="Self.FK_Student_rating_Student" FromRole="Student" ToRole="Student_grade" />
+        </EntityType>
+        <EntityType Name="Student_grade">
+          <Key>
+            <PropertyRef Name="number" />
+          </Key>
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="dsscipline_ID" Type="Int32" />
+          <Property Name="student_ID" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="Double" />
+          <NavigationProperty Name="Discipline" Relationship="Self.FK_Student_rating_Discipline" FromRole="Student_grade" ToRole="Discipline" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_rating_Student" FromRole="Student_grade" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="passport_ID" />
+          </Key>
+          <Property Name="passport_ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="scientist_degree" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Discipline" Relationship="Self.Teachers_disciplines" FromRole="Teacher" ToRole="Discipline" />
+        </EntityType>
+        <Association Name="FK_Issues_of_books_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="Issues_of_books" Type="Self.Issues_of_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_ID" />
+            </Principal>
+            <Dependent Role="Issues_of_books">
+              <PropertyRef Name="book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_rating_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="0..1" />
+          <End Role="Student_grade" Type="Self.Student_grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="discipline_ID" />
+            </Principal>
+            <Dependent Role="Student_grade">
+              <PropertyRef Name="dsscipline_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups1" Type="Self.Groups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="group_ID" />
+            </Principal>
+            <Dependent Role="Groups1">
+              <PropertyRef Name="group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Issues_of_books_Student1">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Issues_of_books" Type="Self.Issues_of_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_ID" />
+            </Principal>
+            <Dependent Role="Issues_of_books">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="passport_ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="passport_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_rating_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student_grade" Type="Self.Student_grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="student_ID" />
+            </Principal>
+            <Dependent Role="Student_grade">
+              <PropertyRef Name="student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Groups_discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+        </Association>
+        <Association Name="Teachers_disciplines">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FirstEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d" EntityType="Self.C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d" />
+          <EntitySet Name="ChangeTracking" EntityType="Self.ChangeTracking" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Book" EntityType="Self.Book" />
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="Issues_of_books" EntityType="Self.Issues_of_books" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Student_grade" EntityType="Self.Student_grade" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK_Issues_of_books_Book" Association="Self.FK_Issues_of_books_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Issues_of_books" EntitySet="Issues_of_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_rating_Discipline" Association="Self.FK_Student_rating_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Student_grade" EntitySet="Student_grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Groups" Association="Self.FK_Groups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Groups1" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Issues_of_books_Student1" Association="Self.FK_Issues_of_books_Student1">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Issues_of_books" EntitySet="Issues_of_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_rating_Student" Association="Self.FK_Student_rating_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Student_grade" EntitySet="Student_grade" />
+          </AssociationSet>
+          <AssociationSet Name="Groups_discipline" Association="Self.Groups_discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="Teachers_disciplines" Association="Self.Teachers_disciplines">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FirstModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FirstModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="Get_scholarship" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FirstModelContainer" CdmEntityContainer="FirstEntities1">
+          <EntitySetMapping Name="C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d">
+            <EntityTypeMapping TypeName="FirstModel.C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d">
+              <MappingFragment StoreEntitySet="_TransactionIndex_3d532083-f1ab-4ad0-bad5-d6d98094990d">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeTracking">
+            <EntityTypeMapping TypeName="FirstModel.ChangeTracking">
+              <MappingFragment StoreEntitySet="ChangeTracking">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateTimeTracking" ColumnName="DateTimeTracking" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TrackingName" ColumnName="TrackingName" />
+                <ScalarProperty Name="XMLTracking" ColumnName="XMLTracking" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FirstModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="FirstModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="book_ID" ColumnName="book_ID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="book_count" ColumnName="book_count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discipline">
+            <EntityTypeMapping TypeName="FirstModel.Discipline">
+              <MappingFragment StoreEntitySet="Discipline">
+                <ScalarProperty Name="discipline_ID" ColumnName="discipline_ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="FirstModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="group_ID" ColumnName="group_ID" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issues_of_books">
+            <EntityTypeMapping TypeName="FirstModel.Issues_of_books">
+              <MappingFragment StoreEntitySet="Issues_of_books">
+                <ScalarProperty Name="issues_of_books_ID" ColumnName="issues_of_books_ID" />
+                <ScalarProperty Name="date_of_issues" ColumnName="date_of_issues" />
+                <ScalarProperty Name="date_of_comeback" ColumnName="date_of_comeback" />
+                <ScalarProperty Name="book_ID" ColumnName="book_ID" />
+                <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="FirstModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="passport_ID" ColumnName="passport_ID" />
+                <ScalarProperty Name="identification_code" ColumnName="identification_code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="Year_of_birth" ColumnName="Year_of_birth" />
+                <ScalarProperty Name="Place_of_birth" ColumnName="Place_of_birth" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="FirstModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="passport_ID" ColumnName="passport_ID" />
+                <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+                <ScalarProperty Name="group_ID" ColumnName="group_ID" />
+                <ScalarProperty Name="scholarship" ColumnName="scholarship" />
+                <ScalarProperty Name="place_in_rating" ColumnName="place_in_rating" />
+                <ScalarProperty Name="dorm_room" ColumnName="dorm_room" />
+                <ScalarProperty Name="headmaster" ColumnName="headmaster" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_grade">
+            <EntityTypeMapping TypeName="FirstModel.Student_grade">
+              <MappingFragment StoreEntitySet="Student_grade">
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="dsscipline_ID" ColumnName="dsscipline_ID" />
+                <ScalarProperty Name="student_ID" ColumnName="student_ID" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="FirstModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="passport_ID" ColumnName="passport_ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="scientist_degree" ColumnName="scientist_degree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Groups_discipline" TypeName="FirstModel.Groups_discipline" StoreEntitySet="Groups_discipline">
+            <EndProperty Name="Discipline">
+              <ScalarProperty Name="discipline_ID" ColumnName="discipline_ID" />
+            </EndProperty>
+            <EndProperty Name="Groups">
+              <ScalarProperty Name="group_ID" ColumnName="group_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Teachers_disciplines" TypeName="FirstModel.Teachers_disciplines" StoreEntitySet="Teachers_disciplines">
+            <EndProperty Name="Discipline">
+              <ScalarProperty Name="discipline_ID" ColumnName="discipline_ID" />
+            </EndProperty>
+            <EndProperty Name="Teacher">
+              <ScalarProperty Name="passport_ID" ColumnName="teacher_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище FirstModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище FirstModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище FirstModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище FirstModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FirstModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище FirstModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FirstModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище FirstModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище FirstModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="Get_scholarship" FunctionName="Хранилище FirstModel.Get_scholarship" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

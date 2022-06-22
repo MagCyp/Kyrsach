@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b0bba2e0b0504b61beee57384ee07a6d" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="FirstModel.C_TransactionIndex_3d532083_f1ab_4ad0_bad5_d6d98094990d" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.ChangeTracking" Width="1.5" PointX="7.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Book" Width="1.5" PointX="13.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Discipline" Width="1.5" PointX="10.625" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Groups" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Issues_of_books" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Person" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Student" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Student_grade" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstModel.Teacher" Width="1.5" PointX="12.625" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="FirstModel.FK_Issues_of_books_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.FK_Student_rating_Discipline" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.FK_Groups_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.FK_Issues_of_books_Student1" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.FK_Student_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.FK_Student_rating_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.Groups_discipline" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstModel.Teachers_disciplines" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
